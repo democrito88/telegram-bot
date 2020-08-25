@@ -28,3 +28,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 })->name('mensagem');*/
 
 Route::post('mensagem', 'mensagemController@enviar')->name('mensagem');
+
+Route::post('email', 'emailController@enviar')->name('email');

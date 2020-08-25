@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
@@ -16,7 +16,7 @@
 
                     {{ __('You are logged in!') }}<br><br>
 
-                    <form class="form-container" action="{{ route('mensagem') }}" method="POST">
+                    <form action="{{ route('mensagem') }}" method="POST">
                         @csrf
                         <label for="id">Escolha o destinatário</label>
                         <select name="id" class="form-control">
@@ -82,6 +82,32 @@
                         </div>
                     @endisset
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-header">{{ __('Dashboard') }}</div>
+
+            <div class="card-body">
+                <form action="{{ route('email') }}" method="POST">
+                    @csrf
+                    <label for="email">Escolha o destinatário</label>
+                    <select id="email" name="email" class="form-control">
+                        @foreach ($usuarios as $usuario)
+                            <option value="{{ $usuario['email'] }}">{{ $usuario['name'] }}</option>
+                        @endforeach
+                    </select><br><br>
+                    <label for="assunto">Assunto</label>
+                    <input name="assunto" type="text" id="assunto"><br>
+                    <label for="conteudo">Mensagem</label>
+                    <textarea id="conteudo" name="conteudo"></textarea><br>
+                    <hr><br>
+                    <button type="submit" class="btn btn-info">Enviar</button>
+                </form>
+                @isset($mensagemMail)
+                    <div class="alert alert-success">
+                        <h3>Email enviado com sucesso!</h3>
+                    </div>
+                @endisset
             </div>
         </div>
     </div>
