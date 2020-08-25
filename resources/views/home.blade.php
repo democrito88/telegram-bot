@@ -23,13 +23,40 @@
                             @foreach ($usuarios as $usuario)
                                 <option value="{{ $usuario['id'] }}">{{ $usuario['name'] }}</option>
                             @endforeach
-                        </select>
-                        <label for="mensagem" class="">Digite sua mensagem de texto</label>
-                        <input class="form-control" type="text" name="mensagem" id="mensagem"><br><br>
-                        <label for="imagem" class="">URL da imagem</label>
-                        <input class="form-control" type="text" name="imagem" id="imagem"><br><br>
-                        <label for="legenda" class="">Legenda</label>
-                        <input class="form-control" type="text" name="legenda" id="legenda"><br><br>
+                        </select><br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="mensagem" class="">Digite sua mensagem de texto</label>
+                                <input class="form-control" type="text" name="mensagem" id="mensagem">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="imagem" class="">URL da imagem</label>
+                                <input class="form-control" type="text" name="imagem" id="imagem">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="video" class="">URL do Video</label>
+                                <input class="form-control" type="text" name="video" id="video">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="sticker" class="">URI do sticker</label>
+                                <input class="form-control" type="text" name="sticker" id="sticker">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="document" class="">Documento</label>
+                                <input class="form-control" type="text" name="documento" id="documento">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="legenda" class="">Legenda</label>
+                                <input class="form-control" type="text" name="legenda" id="legenda">
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
                         <button class="btn btn-primary form-control" type="submit">Envie a mensagem!</button>
                     </form>
                     <br><br>

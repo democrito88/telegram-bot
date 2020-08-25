@@ -7,7 +7,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use TelegramNotifications\TelegramChannel;
-use TelegramNotifications\Messages\TelegramCollection;
+use TelegramNotifications\Messages\TelegramMessage;
+use TelegramNotifications\Messages\TelegramPhoto;
+use TelegramNotifications\Messages\TelegramVideo;
+use TelegramNotifications\Messages\TelegramSticker;
+use TelegramNotifications\Messages\TelegramContact;
+use TelegramNotifications\Messages\TelegramDocument;
+use TelegramNotifications\Messages\TelegramLocation;
 
 class TelegramNotification extends Notification
 {
@@ -31,17 +37,17 @@ class TelegramNotification extends Notification
      */
     public function __construct($mensagemInfo = array())
     {
-        $this->mensagem = isset($mensagemInfo['mensagem']) && !is_null($mensagemInfo['mensagem'])? $mensagemInfo['mensagem'] : null;
-        $this->imagem = isset($mensagemInfo['imagem']) && !is_null($mensagemInfo['imagem'])? $mensagemInfo['imagem'] : null;
-        $this->legenda = isset($mensagemInfo['legenda']) && !is_null($mensagemInfo['legenda'])? $mensagemInfo['legenda'] : null;
-        $this->documento = isset($mensagemInfo['documento']) && !is_null($mensagemInfo['documento'])? $mensagemInfo['documento'] : null;
-        $this->numeroContato = isset($mensagemInfo['numeroContato']) && !is_null($mensagemInfo['numeroContato'])? $mensagemInfo['numeroContato'] : null;
-        $this->nomeContato = isset($mensagemInfo['nomeContato']) && !is_null($mensagemInfo['nomeContato'])? $mensagemInfo['nomeContato'] : null;
-        $this->sobrenomeContato = isset($mensagemInfo['sobrenomeContato']) && !is_null($mensagemInfo['sobrenomeContato'])? $mensagemInfo['sobrenomeContato'] : null;
-        $this->video = isset($mensagemInfo['video']) && !is_null($mensagemInfo['video'])? $mensagemInfo['video'] : null;
-        $this->sticker = isset($mensagemInfo['sticker']) && !is_null($mensagemInfo['sticker'])? $mensagemInfo['sticker'] : null;
-        $this->latitude = isset($mensagemInfo['latitude']) && !is_null($mensagemInfo['latitude'])? $mensagemInfo['latitude'] : null;
-        $this->longitude = isset($mensagemInfo['logitude']) && !is_null($mensagemInfo['longitude'])? $mensagemInfo['longitude'] : null;
+        $this->mensagem = isset($mensagemInfo['mensagem']) ? $mensagemInfo['mensagem'] : null;
+        $this->imagem = isset($mensagemInfo['imagem']) ? $mensagemInfo['imagem'] : null;
+        $this->legenda = isset($mensagemInfo['legenda']) ? $mensagemInfo['legenda'] : "";
+        $this->documento = isset($mensagemInfo['documento']) ? $mensagemInfo['documento'] : null;
+        $this->numeroContato = isset($mensagemInfo['numeroContato']) ? $mensagemInfo['numeroContato'] : null;
+        $this->nomeContato = isset($mensagemInfo['nomeContato']) ? $mensagemInfo['nomeContato'] : null;
+        $this->sobrenomeContato = isset($mensagemInfo['sobrenomeContato']) ? $mensagemInfo['sobrenomeContato'] : null;
+        $this->video = isset($mensagemInfo['video']) ? $mensagemInfo['video'] : null;
+        $this->sticker = isset($mensagemInfo['sticker']) ? $mensagemInfo['sticker'] : null;
+        $this->latitude = isset($mensagemInfo['latitude']) ? $mensagemInfo['latitude'] : null;
+        $this->longitude = isset($mensagemInfo['logitude']) ? $mensagemInfo['longitude'] : null;
     }
 
     /**
@@ -83,33 +89,20 @@ class TelegramNotification extends Notification
     }
 
     public function toTelegram(){
-        if (isset($this->mensagem) && $this->mensagem != "") {
+        if (!is_null($this->mensagem)) {
             return (new TelegramMessage())->text($this->mensagem);
-
-        } if (isset($this->imagem) && $this->imagem != "") {
+        } if (!is_null($this->imagem)) {
             return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
-        } if (isset($this->video)) {
+        } if (!is_null($this->video)) {
             return (new TelegramVideo())->video($this->video)->caption($this->legenda);
-        } if (isset($this->documento) && $this->imagem != "") {
-            return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
-        } if (isset($this->imagem) && $this->imagem != "") {
-            return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
-        } if (isset($this->imagem) && $this->imagem != "") {
-            return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
-        } if (isset($this->imagem) && $this->imagem != "") {
-            return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
-        } if (isset($this->imagem) && $this->imagem != "") {
-            return (new TelegramPhoto())->photo($this->imagem)->caption($this->legenda);
+        } if (!is_null($this->documento)) {
+            return (new TelegramDocument())->document($this->documento)->caption($this->legenda);
+        } if (!is_null($this->numeroContato)) {
+            return (new TelegramContact())->contact($this->numeroContato)->first_name($this->nomeContato)->last_name($this->sobrenomeContato);
+        } if (!is_null($this->sticker)) {
+            return (new TelegramSticker())->sticker($this->sticker);
+        } if (!is_null($this->latitude)) {
+            return (new TelegramLocation())->latitude($this->latitude)->longitude($this->longitude);
         }
-        //dd(['mensagem' => $this->mensagem, 'imagem' => $this->imagem, 'legenda' => $this->legenda]);
-
-        /*return (new TelegramCollection())
-            ->message(['text' => $this->mensagem]);
-            //->photo(['photo' => $this->imagem, 'caption' => $this->legenda]);
-            /*->video(['video' => $this->video, 'caption' => $this->legenda])
-            ->document(['document' => $this->documento, 'caption' => $this->legenda])
-            ->contact(['phone_number' => $this->numeroContato, 'first_name' => $this->nomeContato, 'last_name' => $this->sobrenomeContato])
-            ->location(['latitude' => $this->latitude, 'longitude' => $this->longitude])
-            ->sticker(['sticker' => $this->sticker]);*/
     }
 }
