@@ -46,8 +46,8 @@ class TelegramNotification extends Notification
         $this->sobrenomeContato = isset($mensagemInfo['sobrenomeContato']) ? $mensagemInfo['sobrenomeContato'] : null;
         $this->video = isset($mensagemInfo['video']) ? $mensagemInfo['video'] : null;
         $this->sticker = isset($mensagemInfo['sticker']) ? $mensagemInfo['sticker'] : null;
-        $this->latitude = isset($mensagemInfo['latitude']) ? $mensagemInfo['latitude'] : null;
-        $this->longitude = isset($mensagemInfo['logitude']) ? $mensagemInfo['longitude'] : null;
+        $this->latitude = isset($mensagemInfo['latitude']) ? floatval($mensagemInfo['latitude']) : null;
+        $this->longitude = isset($mensagemInfo['longitude']) ? floatval($mensagemInfo['longitude']) : null;
     }
 
     /**

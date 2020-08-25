@@ -57,6 +57,19 @@
                         <br>
                         <hr>
                         <br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="latitude" class="">Latitude</label>
+                                <input class="form-control" type="text" name="latitude" id="latitude">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="longitude" class="">Longitude</label>
+                                <input class="form-control" type="text" name="longitude" id="longitude">
+                            </div>
+                        </div>
+                        <br>
+                        <hr>
+                        <br>
                         <button class="btn btn-primary form-control" type="submit">Envie a mensagem!</button>
                     </form>
                     <br><br>
