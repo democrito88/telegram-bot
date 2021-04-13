@@ -30,3 +30,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('mensagem', 'mensagemController@enviar')->name('mensagem');
 
 Route::post('email', 'emailController@enviar')->name('email');
+
+Route::get('calendar','EventController@index')->name('calendar');

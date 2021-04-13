@@ -31,9 +31,10 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function(){
             $mensagemInfo = array();
-            $mensagemInfo['imagem'] = "https://img1.migalhas.uol.com.br/gf_base/empresas/MIGA/imagens/ACE835264E07463CBCB9DFDB89CE5BF9C414_tele.jpg";
-            $mensagemInfo['legenda'] = "De hora em hora o SBT informa o resultado parcial da telesena de Tiradentes!";
-            $mensagemInfo['id'] = 2;
+            $mensagemInfo['imagem'] = "https://chocolate.co.ao/wp-content/uploads/2020/05/4c4ca932d0ef9e3c0ef3.jpg";
+            $mensagemInfo['legenda'] = "Olá, eu sou o duende da sorte! Jogue estes números para ganhar na megasena! "
+            ." (".random_int(1, 60).") (".random_int(1, 60).") (".random_int(1, 60).") (".random_int(1, 60).") (".random_int(1, 60).") (".random_int(1, 60).") ";
+            $mensagemInfo['id'] = 3;
             $request = new Request($mensagemInfo);
 
             $mc = new mensagemController();
