@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang='en'>
   <head>
     <meta charset='utf-8' />
@@ -14,7 +15,12 @@
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }
+            },
+            events: [
+                @foreach ($eventos as $evento)
+                    {!! json_encode($evento) !!},
+                @endforeach
+            ]
         });
         calendar.render();
       });

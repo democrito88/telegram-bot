@@ -32,3 +32,5 @@ Route::post('mensagem', 'mensagemController@enviar')->name('mensagem');
 Route::post('email', 'emailController@enviar')->name('email');
 
 Route::get('calendar','EventController@index')->name('calendar');
+Route::get('eventStore','EventController@store')->name('eventStore');
+Route::get('eventUpdate','EventController@update')->name('eventUpdate');
