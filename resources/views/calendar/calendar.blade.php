@@ -10,7 +10,7 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            initialDate: '2021-04-01',
+            initialDate: '{!! date("Y-m-01") !!}',
             headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
@@ -18,7 +18,7 @@
             },
             events: [
                 @foreach ($eventos as $evento)
-                    {!! json_encode($evento) !!},
+                    {!! '{"title":"'.$evento->name.'","start":"'.$evento->start_time.'","url":"",},' !!}
                 @endforeach
             ]
         });
